@@ -1,12 +1,13 @@
 package in.cdac.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.validation.annotation.Validated;
@@ -31,7 +32,14 @@ public class OrderController {
 	
 	@GetMapping("/list")
 	public List<OrderModel> getAllOrder() {
-		return orderModelRepository.findAll();
+		
+		List<OrderModel> list1 = orderModelRepository.findByProductName("iphone");
+		System.out.println(list1);
+		
+		list1 = orderModelRepository.findAllCustomQuery();
+		list1 = orderModelRepository.findAllWhereCustomQuery(5l, "iphone");
+		
+		return orderModelRepository.findAll(Sort.by(Direction.DESC, "productName"));
 	}
 	
 	
@@ -39,6 +47,9 @@ public class OrderController {
 	public OrderModel createOrder(@Valid @RequestBody OrderModel order) {
 		
 		orderModelRepository.save(order);
+		
+		// orderModelRepository.addRecord(10000l, "ABCD001", "ABCD PQRS", 10, 99.99, true);
+		
 		
 		return order;
 	}
