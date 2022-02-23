@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 @Data
@@ -33,7 +35,7 @@ public class OrderModel {
 	
 	private double productPrice;
 	
-	@DateTimeFormat(iso = ISO.DATE)
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate purchaseDate;
 	private boolean offer;
 	
