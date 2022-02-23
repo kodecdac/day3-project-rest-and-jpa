@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.cdac.models.OrderModel;
@@ -70,7 +71,7 @@ public class OrderController {
 	
 	
 	@GetMapping("/createV1")
-	public String createOrderV1( boolean offer, @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy") LocalDate purchaseDate, double productPrice, String productId, int prodcutQty, String productName ) {
+	public String createOrderV1(@RequestParam(name = "offer1") boolean offer, @DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy") LocalDate purchaseDate, double productPrice, String productId, int prodcutQty, String productName ) {
 		return "success";
 	}
 	
